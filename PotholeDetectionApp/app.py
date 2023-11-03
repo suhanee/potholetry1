@@ -51,11 +51,12 @@ confidence = float(st.sidebar.slider(
 
 model=None
 # loading weight file
-weight_file = st.sidebar.file_uploader("Upload Model Weight File", type=("pt"))
+weight_file="C:/Users/miman/potholetry1/PotholeDetectionApp/weights/best.pt"
+#weight_file = st.sidebar.file_uploader("Upload Model Weight File", type=("pt"))
 set_background('bgimages/background1.jpg')
 # loading weight file and creat file
 if weight_file:
-    model_path = Path(weight_file.name)
+    model_path = Path(weight_file)
     try:
         model = helper.load_model(model_path)
         st.success("Model successfully loaded.")
@@ -117,9 +118,10 @@ if source_radio == settings.IMAGE:
                         width= x2-x1
                         height=y2-y1
                         area= width*height
+                        perimeter=2*(width+height)
                         
                         st.write(f"Area of detected pothole {i}: {area:.2f}")
-            
+                        st.write(f"Perimeter of detected pothole {i}: {perimeter:.2f}")
                     st.write("The number of potholes detected is:", i)
                 # except Exception as ex:
                 #     # st.write(ex)
